@@ -1,5 +1,5 @@
-export const PROJECT_HYPERSCALE = '/src/assets/images/project_hyperscale_1785063873049.jpg';
-export const PROJECT_AETHER_AI = '/src/assets/images/project_aether_ai_1785063889668.jpg';
+export const PROJECT_HYPERSCALE = '/src/assets/images/project_hyperscale_1785063873049          
+export const PROJECT_AETHER_AI = '/images/kimra-ai.png';
 export const PROJECT_NOVA_FINANCE = '/src/assets/images/project_nova_finance_1785063908552.jpg';
 
 export const ENGINEER_BIO = {
