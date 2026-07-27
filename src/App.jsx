@@ -72,7 +72,7 @@ export default function App() {
             <HeroSection
               soundEnabled={soundEnabled}
               onOpenContact={() => setIsContactOpen(true)}
-              onOpenResume={() => setIsResumeOpen(true)}
+              onOpenResume={() => window.open('/resume.pdf', '_blank')}
             />
 
             <StorySection soundEnabled={soundEnabled} />
