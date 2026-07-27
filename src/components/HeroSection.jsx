@@ -7,75 +7,17 @@ import { playLuxuryClick, playChimeUnlocked } from '../utils/sound';
 import profilePhoto from '../assets/images/abdul-rehman-photo.jpg';
 
 export const HeroSection = ({ soundEnabled, onOpenContact, onOpenResume }) => {
-  const [isDownloading, setIsDownloading] = useState(false);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
 
   const handleDownloadResume = () => {
-    setIsDownloading(true);
     playLuxuryClick(soundEnabled);
-
-    setTimeout(() => {
-      const cvText = `
-===================================================================
-                  ABDUL REHMAN GHAFFAR
-               Software Engineer & AI Architect
-===================================================================
-
-CONTACT INFORMATION:
-- Email: ${ENGINEER_BIO.email}
-- Phone: ${ENGINEER_BIO.phone}
-- Location: ${ENGINEER_BIO.location}
-- GitHub: ${ENGINEER_BIO.githubUrl}
-- LinkedIn: ${ENGINEER_BIO.linkedinUrl}
-- Portfolio: ${ENGINEER_BIO.portfolioUrl}
-
-CORE SPECIALIZATIONS:
-• MERN Stack Development (MongoDB, Express, React, Node.js)
-• Artificial Intelligence & Google Gemini API Integration
-• Kimra AI Architecture & Autonomous Agent Workflows
-• Voice AI & Real-Time Speech Synthesis Loops
-• Cyber Security & OWASP Top 10 Application Hardening
-• Prompt Engineering & Guardrail Schema Design
-• Modern UI Engineering & High-Performance Web Apps
-
-PROFESSIONAL SUMMARY:
-Dedicated Software Engineer with proven expertise in crafting production-ready 
-full-stack MERN SaaS products, integrating Google Gemini multi-modal AI systems, 
-implementing bank-grade security protocols, and engineering responsive interfaces.
-
-PROJECTS & KEY ACHIEVEMENTS:
-1. Kimra AI Multi-Modal Engine
-   - Multi-modal AI platform powered by Google Gemini API & Voice AI speech loops.
-   - Streaming agent execution with sub-80ms TTFT and prompt guardrails.
-
-2. MERN SaaS Product Engine
-   - Multi-tenant full-stack web application with JWT auth, role-based controls,
-     and MongoDB aggregation pipelines.
-
-3. Aegis Web Cyber Security Shield
-   - OWASP vulnerability scanner, JWT verification, and CORS/CSP compliance auditor.
-
-===================================================================
-Generated from Official Portfolio: ${ENGINEER_BIO.portfolioUrl}
-===================================================================
-      `.trim();
-
-      const blob = new Blob([cvText], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'Abdul_Rehman_Ghaffar_Resume.txt';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-
-      setIsDownloading(false);
-      setDownloadSuccess(true);
-      playChimeUnlocked(soundEnabled);
-
-      setTimeout(() => setDownloadSuccess(false), 3000);
-    }, 1000);
+    const link = document.createElement('a');
+    link.href = '/resume.pdf';
+    link.download = 'Abdul_Rehman_Ghaffar_Resume.pdf';
+    link.click();
+    setDownloadSuccess(true);
+    playChimeUnlocked(soundEnabled);
+    setTimeout(() => setDownloadSuccess(false), 3000);
   };
 
   return (
@@ -122,16 +64,10 @@ Generated from Official Portfolio: ${ENGINEER_BIO.portfolioUrl}
             >
               <button
                 onClick={handleDownloadResume}
-                disabled={isDownloading}
                 className="relative group overflow-hidden px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 text-slate-950 font-bold text-sm tracking-wide shadow-xl shadow-emerald-500/20 hover:shadow-2xl hover:shadow-emerald-500/40 transition-all duration-300 transform hover:scale-[1.03] flex items-center gap-3 cursor-pointer"
               >
                 <span className="relative z-10 flex items-center gap-2.5">
-                  {isDownloading ? (
-                    <>
-                      <span className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
-                      <span>Generating CV...</span>
-                    </>
-                  ) : downloadSuccess ? (
+                  {downloadSuccess ? (
                     <>
                       <Check className="w-4 h-4 text-slate-950" />
                       <span>Resume Downloaded!</span>
